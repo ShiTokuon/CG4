@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "LightGroup.h"
 #include "ParticleManager.h"
+//#include <fbxsdk.h>
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
@@ -14,6 +15,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 	Input* input = nullptr;	
 	Audio* audio = nullptr;
 	GameScene* gameScene = nullptr;
+	//FbxManager* fbxManager = FbxManager::Create();
 
 	// ゲームウィンドウの作成
 	win = new WinApp();
