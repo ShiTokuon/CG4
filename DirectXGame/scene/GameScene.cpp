@@ -2,6 +2,7 @@
 #include <cassert>
 #include <sstream>
 #include <iomanip>
+#include "FbxLoader.h"
 
 using namespace DirectX;
 
@@ -37,6 +38,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio * audio)
 	// デバッグテキスト初期化
 	debugText = DebugText::GetInstance();
 	debugText->Initialize(debugTextTexNumber);
+
+	// モデル名を指定してファイル読込
+	FbxLoader::GetInstance()->LoadModelFromFile(
+		"cube");
 
 	// テクスチャ読み込み
 	if (!Sprite::LoadTexture(1, L"Resources/background.png")) {
