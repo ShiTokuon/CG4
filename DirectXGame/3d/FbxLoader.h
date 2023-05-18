@@ -2,6 +2,7 @@
 
 #include "fbxsdk.h"
 
+#include <Model.h>
 #include <d3d12.h>
 #include <d3dx12.h>
 #include <string>
@@ -11,6 +12,7 @@ class FbxLoader
 private: //エイリアス
 	//std::を省略
 	using string = std::string;
+
 
 public: // 定数
 	// モデル格納ルートパス
@@ -39,6 +41,14 @@ public:
 	/// </summary>
 	/// <returns>インスタンス</returns>
 	static FbxLoader* GetInstance();
+
+/// <summary>
+/// 再帰的にノード構成を解析
+/// </summary>
+/// <param name="model">読込先モデルオブジェクト</param>
+/// <param name="fbxNode">解析対象のノード</param>
+/// <param name="parent">親ノード</param>
+	void ParseNodeRecusive(Model* model, FbxNode* fbxNode,Node*parent = nullptr);
 
 private:
 	// D3D12デバイス
