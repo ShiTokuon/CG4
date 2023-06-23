@@ -38,7 +38,7 @@ public:
 	/// ファイルからFBXモデルの読込
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
-	void LoadModelFromFile(const string& modelName);
+	Model* LoadModelFromFile(const string& modelName);
 
 	/// <summary>
 	/// シングルトンインスタンスの取得
@@ -63,7 +63,7 @@ public:
 
 	// 頂点座標読み取り
 	void ParseMeshVertices(Model* model, FbxMesh* fbxMesh);
-    // 面情報読み取り
+	// 面情報読み取り
 	void ParseMeshFaces(Model* model, FbxMesh* fbxMesh);
 	// マテリアル読み取り
 	void ParseMaterial(Model* model, FbxNode* fbxNode);

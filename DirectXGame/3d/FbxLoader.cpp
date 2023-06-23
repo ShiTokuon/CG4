@@ -42,7 +42,7 @@ void FbxLoader::Finalize()
 	fbxManager->Destroy();
 }
 
-void FbxLoader::LoadModelFromFile(
+Model* FbxLoader::LoadModelFromFile(
 	const string& modelName)
 {
 	// モデルと同じ名前のファイルから読み込む
@@ -69,7 +69,7 @@ void FbxLoader::LoadModelFromFile(
 	//モデル生成
 	Model* model = new Model();
 	model->name = modelName;
-	
+
 	// FBXノード数を取得
 	int nodeCount = fbxScene->GetNodeCount();
 	// あらかじめ必要数分のメモリを確保することで、アドレスがずれるのを予防
@@ -80,6 +80,8 @@ void FbxLoader::LoadModelFromFile(
 	fbxScene->Destroy();
 	// バッファ生成
 	model->CreateBuffers(device);
+
+	return model;
 }
 
 void FbxLoader::ParseNodeRecusive(Model* model, FbxNode* fbxNode, Node* parent)
@@ -139,7 +141,7 @@ void FbxLoader::ParseNodeRecusive(Model* model, FbxNode* fbxNode, Node* parent)
 
 	// 子ノードに対して再帰呼び出し
 	for (int i = 0; i < fbxNode->GetChildCount(); i++) {
-		ParseNodeRecusive(model, fbxNode->GetChild(i),&node);
+		ParseNodeRecusive(model, fbxNode->GetChild(i), &node);
 	}
 }
 
@@ -215,7 +217,7 @@ void FbxLoader::ParseMeshFaces(Model* model, FbxMesh* fbxMesh)
 			{
 				vertex.normal.x = (float)normal[0];
 				vertex.normal.y = (float)normal[1];
-				vertex.normal.z - (float)normal[2];
+				vertex.normal.z = (float)normal[2];
 			}
 
 			// テクスチャUV読込
@@ -283,7 +285,7 @@ void FbxLoader::ParseMaterial(Model* model, FbxNode* fbxNode)
 
 		// ディフューズテクスチャを取り出す
 		const FbxProperty diffuseProperty =
-			material->FindDstProperty(FbxSurfaceMaterial::sDiffuse);
+			material->FindProperty(FbxSurfaceMaterial::sDiffuse);
 		if (diffuseProperty.IsValid())
 		{
 			const FbxFileTexture* texture = diffuseProperty.GetSrcObject<FbxFileTexture>();
@@ -297,7 +299,7 @@ void FbxLoader::ParseMaterial(Model* model, FbxNode* fbxNode)
 				textureLoaded = true;
 			}
 		}
-		 
+
 		// テクスチャがない場合は白テクスチャを貼る
 		if (!textureLoaded) {
 			LoadTexture(model, baseDirectory +
