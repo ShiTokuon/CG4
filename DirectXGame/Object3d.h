@@ -8,6 +8,7 @@
 #include <d3d12.h>
 #include <d3dx12.h>
 #include <DirectXMath.h>
+#include <FbxLoader.h>
 
 class Object3d
 {
@@ -34,6 +35,10 @@ private: // 静的メンバ変数
 	// パイプラインステートオブジェクト
 	static ComPtr<ID3D12PipelineState> pipelinestate;
 
+public: // 定数
+	// ボーンの最大数
+	static const int MAX_BONES = 32;
+
 public: // サブクラス
 	// 定数バッファ用データ構造体（座標変換行列）
 	struct ConstBufferDataTransform
@@ -41,6 +46,12 @@ public: // サブクラス
 		XMMATRIX viewproj; // ビュープロジェクション行列
 		XMMATRIX world; // ワールド行列
 		XMFLOAT3 cameraPos; // カメラ座標（ワールド座標）
+	};
+
+	// 定数バッファ用データ構造体（スキニング）
+	struct ConstBufferDataSkin
+	{
+		XMMATRIX bones[MAX_BONES];
 	};
 
 public: // メンバ関数
@@ -73,6 +84,8 @@ public: // メンバ関数
 protected: // メンバ変数
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffTransform;
+	// 定数バッファ（スキン）
+	ComPtr<ID3D12Resource> constBuffSkin;
 	// ローカルスケール
 	XMFLOAT3 scale = { 1,1,1 };
 	// X,Y,Z軸回りのローカル回転角

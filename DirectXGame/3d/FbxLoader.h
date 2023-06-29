@@ -13,8 +13,6 @@ class FbxLoader
 private: //エイリアス
 	//std::を省略
 	using string = std::string;
-	// 
-
 
 public: // 定数
 	// モデル格納ルートパス
