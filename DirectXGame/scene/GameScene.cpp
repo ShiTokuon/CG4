@@ -70,8 +70,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	lightGroup = LightGroup::Create();
 
 	// カメラ注視点をセット
-	camera->SetTarget({ 0, 3, 0 });
-	camera->SetDistance(10.0f);
+	camera->SetTarget({ 0, 2.5f, 0 });
+	camera->SetDistance(8.0f);
 
 	// 3Dオブジェクト生成とモデルのセット
 	object1 = new Object3d;
