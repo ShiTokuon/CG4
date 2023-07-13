@@ -78,6 +78,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	object1->Initialize();
 	object1->SetModel(model1);
 	object1->PlayAnimation();
+	object1->SetRotation({ 0,90,0 });
 }
 
 void GameScene::Update()
@@ -95,18 +96,18 @@ void GameScene::Draw()
 
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
-	Sprite::PreDraw(cmdList);
-	// 背景スプライト描画
-	spriteBG->Draw();
+	//Sprite::PreDraw(cmdList);
+	//// 背景スプライト描画
+	//spriteBG->Draw();
 
-	/// <summary>
-	/// ここに背景スプライトの描画処理を追加できる
-	/// </summary>
+	///// <summary>
+	///// ここに背景スプライトの描画処理を追加できる
+	///// </summary>
 
-	// スプライト描画後処理
-	Sprite::PostDraw();
-	// 深度バッファクリア
-	dxCommon->ClearDepthBuffer();
+	//// スプライト描画後処理
+	//Sprite::PostDraw();
+	//// 深度バッファクリア
+	//dxCommon->ClearDepthBuffer();
 #pragma endregion
 
 #pragma region 3D描画

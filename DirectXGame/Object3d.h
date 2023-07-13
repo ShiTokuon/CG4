@@ -86,6 +86,14 @@ public: // メンバ関数
 	/// </summary>
 	void PlayAnimation();
 
+	/// <summary>
+	/// 回転角
+	/// </summary>
+	/// <param name="rotation">回転座標</param>
+	inline void SetRotation(XMFLOAT3 rotation) {
+		this->rotation = rotation;
+	}
+
 protected: // メンバ変数
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffTransform;

@@ -115,6 +115,12 @@ public: // メンバ関数
 	bool Initialize();
 
 	/// <summary>
+	/// ポストエフェクト用初期化
+	/// </summary>
+	/// <param name="PostefecIniti">ポストエフェクト初期化</param>
+	bool PostInitialize();
+
+	/// <summary>
 	/// 角度の設定
 	/// </summary>
 	/// <param name="rotation">角度</param>
