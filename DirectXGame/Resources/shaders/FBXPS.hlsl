@@ -14,15 +14,15 @@ SamplerState smp:register(s0);
 PSOutput main(VSOutput input) : SV_TARGET
 {
 	PSOutput output;
-	// テクスチャマッピング
-	float4 texcolor = tex.Sample(smp,input.uv);
-	// Lamgert反射
-	float3 light = normalize(float3(1, -1, 1)); // 右下奥　向きのライト
-	float diffuse = saturate(dot(-light, input.normal));
-	float brightness = diffuse + 0.3f;
-	float4 shadecolor = float4(brightness, brightness, brightness, 1.0f);
-	// 陰影とテクスチャの色を合成
-	output.target0 = shadecolor * texcolor;
-	output.target1 = float4(1 - (shadecolor * texcolor).rgb, 1);
-	return output;
+    // テクスチャマッピング
+    float4 texcolor = tex.Sample(smp,input.uv);
+    // Lamgert反射
+    float3 light = normalize(float3(1, -1, 1)); // 右下奥　向きのライト
+    float diffuse = saturate(dot(-light, input.normal));
+    float brightness = diffuse + 0.3f;
+    float4 shadecolor = float4(brightness, brightness, brightness, 1.0f);
+    // 陰影とテクスチャの色を合成
+    output.target0 = shadecolor * texcolor;
+    output.target1 = float4((shadecolor * texcolor).rgb, 1);
+    return output;
 }
